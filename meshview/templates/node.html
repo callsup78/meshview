@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block css %}
+    #node_info {
+        height:100%;
+    }
+    #map{
+        height:100%;
+        min-height: 400px;
+    }
+    #packet_details{
+        height: 95vh;
+        overflow: scroll;
+        top: 3em;
+    }
+{% endblock %}
+
+{% block body %}
+
+{% include "search_form.html" %}
+
+<div id="node" class="container text-center">
+    <div class="container"
+         {% if node %}
+         hx-ext="sse"
+         sse-connect="/events?node_id={{node_id}}{% if portnum %}&portnum={{portnum}}{% endif %}"
+        {% endif %}
+        >
+        <div class="row">
+            <div class="col-md mb-3">
+                <div class="card" id="node_info">
+                    {% if node %}
+                    <div class="card-header">
+                        {{node.long_name}} ({{node.node_id|node_id_to_hex}})
+                    </div>
+                    <div class="card-body">
+                        <dl >
+                            <dt>short name</dt>
+                            <dd>{{node.short_name}}</dd>
+                            <dt>hw model</dt>
+                            <dd>{{node.hw_model}}</dd>
+                            <dt>role</dt>
+                            <dd>{{node.role}}</dd>
+                        </dl>
+                        {% include "node_graphs.html" %}
+                    </div>
+                    {% else %}
+                    <div class="card-body">
+                        A NodeInfo has not been seen.
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md mb-3">
+                <div id="map"/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+            {% include "buttons.html" %}
+            </div>
+        </div>
+
+        <div class="row">
+            {% include 'packet_list.html' %}
+            <div class="col-6 sticky-top" id="packet_details">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if trace %}
+<script>
+    var trace = {{trace | tojson}};
+    var map = L.map('map').setView(trace[0], 13);
+    var markers = L.featureGroup();
+    markers.addTo(map);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    L.polyline(trace).addTo(map);
+    L.marker(trace[0]).addTo(markers);
+    {% for n in neighbors %}
+    var m = L.circleMarker({{n.location | tojson}});
+    m.bindPopup('SNR: {{n.snr}}<br/><a href="/packet_list/{{n.node_id}}">[{{n.short_name}}] {{n.long_name}} {{n.node_id | node_id_to_hex}}</a>');
+    m.addTo(markers);
+    L.polyline([trace[0], {{n.location | tojson}}], {color: 'red'}).addTo(map);
+    map.fitBounds(markers.getBounds().pad(.7));
+    {% endfor %}
+</script>
+{% endif %}
+
+{% endblock %}
