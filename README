@@ -23,7 +23,7 @@ Running - Note, Some things I did to make life MUCH easier, and I am running thi
 * load it by: $ source ~/.bashrc
 * Install PIP: $ curl -O https://bootstrap.pypa.io/get-pip.py && python get-pip.py
 * Clone repo: $ git clone <repo of choice>
-* Be sure to edit: main.py to link to your mqqt feed of choice - In my config I am using: msh/US/bayarea/#
+* Be sure to edit: main.py to link to your mqqt feed of choice - In my config I am using: Server: mqtt.bayme.sh   Topic: msh/US/bayarea/#
 * be sure to edit http.py - Config your server address.
 * launch meshview via: $ python main.py
 
