@@ -6,14 +6,27 @@ database and has a web UI to view them.
 
 Example
 -------
-An example instance, https://meshview.armooo.net, is running with with data
+An example instance, <redacted>, is running with with data
 from the MQTT topic msh/US/bayarea/#.
 
 
-Running
+Running - Note, Some things I did to make life MUCH easier, and I am running this as raw python on a Ubuntu box.
 -------
-$ python3 -m venv env
-$ ./env/bin/pip install -r requirements.txt
-$ ./env/bin/python main.py
+
+* Create a user in Ubunutu for Mesh: sudo useradd -s /bin/bash -d /home/mesh/ -m -G sudo mesh && sudo passwd mesh    (the -G sudo - can be ommitted if you don't want the user to have sudo capability)
+* Install Python 3.12: $ sudo apt-get install python3.12 -y
+* Create a bash source file to make life easier:  $ nano
+   contents:
+    export PYTHONPATH="$PYTHOMPATH=/usr/bin/python3.12"
+    alias python="python3.12"
+   save as: .bashrc
+* load it by: $ ~/.bashrc
+* Install PIP: $ curl -O https://bootstrap.pypa.io/get-pip.py && python get-pip.py
+* Clone repo: $ git clone <repo of choice>
+* Be sure to edit: main.py to link to your mqqt feed of choice - In my config I am using: msh/US/bayarea/#
+* be sure to edit web.py - Config your server address.
+* launch meshview via: $ python main.py
 
 Now you can hit http://localhost:8080/
+
+You can change the web port by editing line 31 of main.py and chosing any port you like.  Be sure that port is open via whatever means you are running within (iptables, firewalld, Security Group in AWS, etc).
