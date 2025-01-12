@@ -29,4 +29,10 @@ Running - Note, Some things I did to make life MUCH easier, and I am running thi
 
 Now you can hit http://localhost:8080/
 
+
+
+Notes:
+-------
+
 You can change the web port by editing line 31 of main.py and chosing any port you like.  Be sure that port is open via whatever means you are running within (iptables, firewalld, Security Group in AWS, etc).
+You may need to install an additional service if you are running this in a cloud host (Google Compute, AWS EC2, etc) to provide a transport from localhost to an external web port.  Nginx, etc...
