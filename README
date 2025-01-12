@@ -4,10 +4,12 @@ Meshview
 This project watches a MQTT topic for meshtastic messages, imports them to a
 database and has a web UI to view them.
 
+
+
 Example
 -------
-An example instance, <redacted>, is running with with data
-from the MQTT topic msh/US/bayarea/#.
+<might be added in the future>
+
 
 
 Running - Note, Some things I did to make life MUCH easier, and I am running this as raw python on a Ubuntu box.
@@ -36,7 +38,10 @@ Now you can hit http://localhost:8080/
 Notes:
 -------
 
-I have edited the base.html file to place a banner over every page for quick links to:  "See a realtime graph of the network"  - "See what people are saying"  - "See everything" - That Broke "Search for a node" - I'll circle back to that eventually.
-You can change the web port by editing line 31 of main.py and chosing any port you like.  Be sure that port is open via whatever means you are running within (iptables, firewalld, Security Group in AWS, etc).
-You may need to install an additional service if you are running this in a cloud host (Google Compute, AWS EC2, etc) to provide a transport from localhost to an external web port.  Nginx, etc...
-Yes, this can be run in Windows 10+ utilizing WSL + Ubuntu. Directions for WSL+Ubuntu can be found easily online. You would still access the web ui in a browser via: http://localhost:8080 (or whatever port you've configured).
+* I have edited the base.html file to place a banner over every page for quick links to:  "See a realtime graph of the network"  - "See what people are saying"  - "See everything" - That Broke "Search for a node" - I'll circle back to that eventually.
+
+* You can change the web port by editing line 31 of main.py and chosing any port you like.  Be sure that port is open via whatever means you are running within (iptables, firewalld, Security Group in AWS, etc).
+
+* You may need to install an additional service if you are running this in a cloud host (Google Compute, AWS EC2, etc) to provide a transport from localhost to an external web port.  Nginx, etc...
+
+* Yes, this can be run in Windows 10+ utilizing WSL + Ubuntu. Directions for WSL+Ubuntu can be found easily online. You would still access the web ui in a browser via: http://localhost:8080 (or whatever port you've configured).
