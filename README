@@ -13,6 +13,8 @@ from the MQTT topic msh/US/bayarea/#.
 Running - Note, Some things I did to make life MUCH easier, and I am running this as raw python on a Ubuntu box.
 -------
 
+I chose to utilize a Ubuntu 20.04.6 LTS server. Any Linux server should work just fine, be sure to use the correct commands for package management (ie: yum, apt, etc.)
+
 * Create a user in Ubunutu for Mesh: sudo useradd -s /bin/bash -d /home/mesh/ -m -G sudo mesh && sudo passwd mesh    (the -G sudo - can be ommitted if you don't want the user to have sudo capability)
 * Install Python 3.12: $ sudo apt-get install python3.12 -y
 * Create a bash source file to make life easier:  $ nano
