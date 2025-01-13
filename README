@@ -38,7 +38,7 @@ Now you can hit http://localhost:8080/
 Notes:
 -------
 
-* I have edited the base.html file to place a banner over every page for quick links to:  "See a realtime graph of the network"  - "See what people are saying"  - "See everything" - That Broke "Search for a node" - I'll circle back to that eventually.
+* I have edited the base.html file to place a banner of Quick Links over every page to:  "See a realtime graph of the network"  - "See what people are saying"  - "See everything".
 
 * You can change the web port by editing line 31 of main.py and chosing any port you like.  Be sure that port is open via whatever means you are running within (iptables, firewalld, Security Group in AWS, etc).
 
